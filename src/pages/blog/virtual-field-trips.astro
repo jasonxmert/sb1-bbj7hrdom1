@@ -1,0 +1,83 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+import { Image } from 'astro:assets';
+
+const virtualTours = [
+  {
+    name: "Smithsonian National Museum of Natural History",
+    url: "https://naturalhistory.si.edu/visit/virtual-tour",
+    description: "Explore millions of specimens and artifacts"
+  },
+  {
+    name: "The Louvre",
+    url: "https://www.louvre.fr/en/online-tours",
+    description: "World's largest art museum virtual experience"
+  },
+  {
+    name: "NASA",
+    url: "https://www.nasa.gov/stem/virtual-field-trips",
+    description: "Space exploration and astronomy tours"
+  }
+];
+---
+
+<Layout 
+  title="Virtual Field Trip Ideas for Modern Classrooms"
+  description="Engaging virtual field trip ideas for educators using Classdom"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Virtual Field Trip Ideas</h1>
+        <div class="flex items-center text-gray-600 text-sm">
+          <span>By Lisa Thompson</span>
+          <span class="mx-2">•</span>
+          <time>April 11, 2024</time>
+        </div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Transforming Learning Through Virtual Exploration</h2>
+        <p>
+          Virtual field trips provide unique opportunities for students to explore the world
+          without leaving the classroom. Studies show that virtual field trips can increase
+          student engagement by up to 45% while reducing educational costs significantly.
+        </p>
+
+        <div class="grid md:grid-cols-2 gap-6 my-8">
+          {virtualTours.map(tour => (
+            <div class="bg-primary-50 rounded-lg p-6">
+              <h3 class="font-semibold mb-2">
+                <a href={tour.url} class="text-primary-600 hover:underline">
+                  {tour.name}
+                </a>
+              </h3>
+              <p class="text-gray-600">{tour.description}</p>
+            </div>
+          ))}
+        </div>
+
+        <h2>Benefits of Virtual Field Trips</h2>
+        <ul>
+          <li>Cost-effective for middle-class school budgets</li>
+          <li>Accessible to all students regardless of location</li>
+          <li>Interactive learning experiences</li>
+          <li>Cross-curricular opportunities</li>
+        </ul>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Implementation Tips:</h3>
+          <ul class="list-disc pl-6">
+            <li>Prepare pre and post-visit activities</li>
+            <li>Create interactive worksheets</li>
+            <li>Encourage student reflection</li>
+            <li>Connect to curriculum standards</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </main>
+</Layout>

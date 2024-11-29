@@ -1,0 +1,206 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  sources: {
+    src: string;
+    type: string;
+  }[];
+  thumbnailUrl?: string;
+  autoplay?: boolean;
+  controls?: boolean;
+  muted?: boolean;
+  loop?: boolean;
+}
+
+const {
+  title,
+  description,
+  sources,
+  thumbnailUrl,
+  autoplay = false,
+  controls = true,
+  muted = false,
+  loop = false
+} = Astro.props;
+---
+
+<div class="video-player bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="aspect-w-16 aspect-h-9 relative">
+    <div class="video-container bg-gray-900">
+      <video
+        class="w-full h-full"
+        poster={thumbnailUrl}
+        {controls}
+        {autoplay}
+        {muted}
+        {loop}
+        playsinline
+        preload="metadata"
+      >
+        {sources.map(source => (
+          <source src={source.src} type={source.type} />
+        ))}
+        <div class="fallback-message p-4 text-white text-center">
+          Your browser doesn't support HTML5 video. Here is a 
+          <a href={sources[0].src} class="text-primary-400 hover:text-primary-300">
+            link to the video
+          </a> instead.
+        </div>
+      </video>
+      
+      <div class="video-overlay absolute inset-0 flex items-center justify-center bg-black bg-opacity-40 transition-opacity duration-300">
+        <button 
+          class="play-button p-4 rounded-full bg-primary-600 bg-opacity-90 hover:bg-opacity-100 transition-all transform hover:scale-110"
+          aria-label="Play video"
+        >
+          <svg 
+            class="w-12 h-12 text-white" 
+            fill="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path d="M8 5v14l11-7z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="p-6">
+    <h3 class="text-xl font-semibold mb-2">{title}</h3>
+    <p class="text-gray-600">{description}</p>
+  </div>
+</div>
+
+<script>
+  class VideoPlayerHandler {
+    constructor(container) {
+      this.container = container;
+      this.video = container.querySelector('video');
+      this.overlay = container.querySelector('.video-overlay');
+      this.playButton = container.querySelector('.play-button');
+      this.isPlaying = false;
+      
+      this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+      if (this.video && this.playButton) {
+        // Play button click
+        this.playButton.addEventListener('click', () => this.togglePlay());
+        
+        // Video events
+        this.video.addEventListener('play', () => this.handlePlay());
+        this.video.addEventListener('pause', () => this.handlePause());
+        this.video.addEventListener('ended', () => this.handleEnded());
+        this.video.addEventListener('error', (e) => this.handleError(e));
+        
+        // Click on video to toggle play/pause
+        this.video.addEventListener('click', () => this.togglePlay());
+      }
+    }
+
+    togglePlay() {
+      if (this.video) {
+        if (this.video.paused) {
+          this.video.play().catch(error => {
+            console.error('Error playing video:', error);
+            // Show user-friendly error message
+            this.showError('Unable to play video. Please try again.');
+          });
+        } else {
+          this.video.pause();
+        }
+      }
+    }
+
+    handlePlay() {
+      this.isPlaying = true;
+      if (this.overlay) {
+        this.overlay.classList.add('opacity-0');
+        setTimeout(() => {
+          this.overlay.classList.add('hidden');
+        }, 300);
+      }
+    }
+
+    handlePause() {
+      this.isPlaying = false;
+      if (this.overlay) {
+        this.overlay.classList.remove('hidden', 'opacity-0');
+      }
+    }
+
+    handleEnded() {
+      this.isPlaying = false;
+      if (this.overlay) {
+        this.overlay.classList.remove('hidden', 'opacity-0');
+      }
+    }
+
+    handleError(error) {
+      console.error('Video error:', error);
+      this.showError('An error occurred while playing the video.');
+    }
+
+    showError(message) {
+      // Create and show error message to user
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 text-white text-center p-4';
+      errorDiv.textContent = message;
+      this.container.querySelector('.video-container').appendChild(errorDiv);
+    }
+  }
+
+  // Initialize all video players on the page
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.video-player').forEach(container => {
+      new VideoPlayerHandler(container);
+    });
+  });
+</script>
+
+<style>
+  .video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .video-overlay {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .video-overlay.hidden {
+    visibility: hidden;
+  }
+
+  .play-button {
+    cursor: pointer;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+  }
+
+  .play-button:hover {
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  /* Custom video controls styling */
+  video::-webkit-media-controls {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+
+  video::-webkit-media-controls-panel {
+    padding: 0 12px;
+  }
+
+  video::-webkit-media-controls-play-button {
+    color: theme('colors.primary.500');
+  }
+</style>

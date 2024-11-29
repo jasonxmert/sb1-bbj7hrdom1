@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const savingsResources = [
+  { text: 'Personal Finance Basics', url: 'https://www.investopedia.com/personal-finance-4427760' },
+  { text: 'Savings Strategies', url: 'https://www.consumerfinance.gov/consumer-tools/savings' },
+  { text: 'Middle-Class Economics', url: 'https://en.wikipedia.org/wiki/Middle_class' }
+];
+---
+
+<Layout 
+  title="Smart Savings Tips for Middle-Class Families"
+  description="Practical savings strategies and financial advice for middle-class families"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Smart Savings Tips for Middle-Class Families</h1>
+        <div class="text-gray-600">Building financial security through smart saving strategies</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Essential Saving Strategies</h2>
+        <p>
+          Discover practical ways to build your savings while maintaining a comfortable lifestyle.
+        </p>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Quick Savings Tips:</h3>
+          <ul class="list-disc pl-6">
+            <li>Automate your savings</li>
+            <li>Use cashback rewards</li>
+            <li>Implement the 24-hour rule for purchases</li>
+            <li>Take advantage of tax-advantaged accounts</li>
+          </ul>
+        </div>
+
+        <h2>Smart Shopping Strategies</h2>
+        <p>
+          Maximize your purchasing power with these techniques:
+        </p>
+        <ul>
+          <li>Compare prices across retailers</li>
+          <li>Use price tracking tools</li>
+          <li>Buy in bulk when practical</li>
+          <li>Time your purchases strategically</li>
+        </ul>
+
+        <h2>Long-term Financial Planning</h2>
+        <p>
+          Build a secure financial future with these strategies:
+        </p>
+        <ul>
+          <li>Emergency fund building</li>
+          <li>Retirement planning</li>
+          <li>Investment strategies</li>
+          <li>Debt management</li>
+        </ul>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Learn More:</h3>
+        <ul class="space-y-2">
+          {savingsResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-blue-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

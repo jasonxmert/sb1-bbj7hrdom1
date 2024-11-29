@@ -1,0 +1,52 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AdSense from './AdSense.astro';
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbs?: Array<{ text: string; href: string }>;
+}
+
+const { title, description, breadcrumbs } = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    {breadcrumbs && (
+      <nav class="mb-8">
+        <ol class="flex items-center space-x-2 text-sm">
+          <li>
+            <a href="/" class="text-gray-500 hover:text-primary-600">Home</a>
+          </li>
+          {breadcrumbs.map((crumb, index) => (
+            <>
+              <li class="text-gray-400">/</li>
+              <li>
+                {index === breadcrumbs.length - 1 ? (
+                  <span class="text-gray-900">{crumb.text}</span>
+                ) : (
+                  <a href={crumb.href} class="text-gray-500 hover:text-primary-600">
+                    {crumb.text}
+                  </a>
+                )}
+              </li>
+            </>
+          ))}
+        </ol>
+      </nav>
+    )}
+
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">{title}</h1>
+      <p class="text-xl text-gray-600">{description}</p>
+    </header>
+
+    <AdSense slot="header" />
+
+    <div class="mt-8">
+      <slot />
+    </div>
+  </main>
+</Layout>

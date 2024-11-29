@@ -1,0 +1,20 @@
+---
+interface Props {
+  slot: 'sidebar' | 'content' | 'header';
+}
+
+const { slot } = Astro.props;
+
+const adClasses = {
+  sidebar: 'w-full h-[600px] bg-gray-100',
+  content: 'w-full h-[250px] my-8 bg-gray-100',
+  header: 'w-full h-[90px] mb-8 bg-gray-100'
+};
+---
+
+<div class={adClasses[slot]}>
+  <!-- AdSense code will go here -->
+  <div class="w-full h-full flex items-center justify-center text-gray-400">
+    Ad Space ({slot})
+  </div>
+</div>

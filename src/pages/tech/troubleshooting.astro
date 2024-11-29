@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const troubleshootingResources = [
+  { text: 'Google Classroom Help', url: 'https://support.google.com/edu/classroom' },
+  { text: 'Common Tech Issues in Education', url: 'https://www.edutopia.org/technology-integration' },
+  { text: 'Digital Learning Support', url: 'https://www.commonsense.org/education/teaching-strategies' }
+];
+---
+
+<Layout 
+  title="Tech Troubleshooting Guide"
+  description="Solutions for common technology issues in educational settings"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Tech Troubleshooting Guide</h1>
+        <div class="text-gray-600">Solutions for common classroom technology issues</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Common Issues and Solutions</h2>
+        <p>
+          Quick fixes for frequently encountered technical problems in educational settings.
+        </p>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Before You Begin:</h3>
+          <ul class="list-disc pl-6">
+            <li>Check internet connectivity</li>
+            <li>Verify system requirements</li>
+            <li>Clear browser cache and cookies</li>
+            <li>Update software and applications</li>
+          </ul>
+        </div>
+
+        <h2>Video Conferencing Issues</h2>
+        <p>
+          Solutions for common video conferencing problems:
+        </p>
+        <ul>
+          <li>Audio not working</li>
+          <li>Video quality issues</li>
+          <li>Connection problems</li>
+          <li>Screen sharing difficulties</li>
+        </ul>
+
+        <h2>Learning Platform Support</h2>
+        <p>
+          Troubleshooting guides for popular learning platforms:
+        </p>
+        <ul>
+          <li>Google Classroom</li>
+          <li>Canvas</li>
+          <li>Zoom for Education</li>
+          <li>Microsoft Teams</li>
+        </ul>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Additional Support:</h3>
+        <ul class="space-y-2">
+          {troubleshootingResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-blue-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

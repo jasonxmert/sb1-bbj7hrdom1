@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+import FeaturedResourceCard from '../../components/FeaturedResourceCard.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { Image } from 'astro:assets';
+
+const resources = [
+  {
+    title: "Budget Planning",
+    description: "Smart financial planning for middle-class families",
+    icon: "💰",
+    href: "/lifestyle/budget-guide",
+    category: "Finance"
+  },
+  {
+    title: "Savings Tips",
+    description: "Practical ways to save money and build wealth",
+    icon: "💎",
+    href: "/lifestyle/savings-tips",
+    category: "Finance"
+  },
+  {
+    title: "Family Resources",
+    description: "Resources for managing family life and education",
+    icon: "👨‍👩‍👧‍👦",
+    href: "/lifestyle/family-resources",
+    category: "Family"
+  }
+];
+
+const featuredVideos = [
+  {
+    title: "Smart Money Management for Families",
+    videoId: "dQw4w9WgXcQ",
+    description: "Expert tips on family budgeting and financial planning"
+  },
+  {
+    title: "Creating Work-Life Balance",
+    videoId: "dQw4w9WgXcQ",
+    description: "Strategies for balancing career and family life"
+  }
+];
+
+const images = [
+  {
+    src: "https://images.unsplash.com/photo-1554224155-6726b3ff858f",
+    alt: "Family financial planning",
+    caption: "Smart financial planning for middle-class families"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1590649880765-91b1956b8276",
+    alt: "Family activities",
+    caption: "Quality family time and activities"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb6",
+    alt: "Education savings",
+    caption: "Planning for education expenses"
+  }
+];
+---
+
+<Layout title="Middle-Class Life">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Middle-Class Life</h1>
+    
+    <AdSense slot="header" />
+    
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Resources</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {resources.map(resource => (
+          <FeaturedResourceCard {...resource} />
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Expert Insights</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {featuredVideos.map(video => (
+          <div class="space-y-4">
+            <VideoEmbed
+              videoId={video.videoId}
+              title={video.title}
+            />
+            <h3 class="text-xl font-semibold">{video.title}</h3>
+            <p class="text-gray-600">{video.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Resource Gallery</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {images.map(image => (
+          <figure class="relative">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={400}
+              height={300}
+              class="rounded-lg"
+            />
+            <figcaption class="mt-2 text-sm text-gray-600 text-center">
+              {image.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

@@ -1,0 +1,87 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const familyResources = [
+  { text: 'Family Education Resources', url: 'https://www.ed.gov/family-and-community-engagement' },
+  { text: 'Middle-Class Family Planning', url: 'https://www.consumerfinance.gov/consumer-tools/family' },
+  { text: 'Educational Support at Home', url: 'https://www.edutopia.org/topic/parent-partnership' }
+];
+---
+
+<Layout 
+  title="Family Resources - Supporting Education at Home"
+  description="Essential resources and guidance for middle-class families supporting their children's education"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Family Resources for Educational Success</h1>
+        <div class="text-gray-600">Supporting your family's educational journey with Classdom</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Creating a Supportive Home Learning Environment</h2>
+        <p>
+          Research shows that a well-structured home learning environment can improve academic performance by up to 40%. 
+          Learn how to create an optimal space for learning and growth.
+        </p>
+
+        <div class="bg-primary-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Essential Components:</h3>
+          <ul class="list-disc pl-6">
+            <li>Dedicated study space setup</li>
+            <li>Time management strategies</li>
+            <li>Educational resources organization</li>
+            <li>Technology integration guidelines</li>
+          </ul>
+        </div>
+
+        <h2>Middle-Class Family Educational Planning</h2>
+        <p>
+          Discover strategies specifically designed for middle-class families to maximize educational opportunities:
+        </p>
+        <ul>
+          <li>Educational savings accounts (529 Plans)</li>
+          <li>Extracurricular activity planning</li>
+          <li>College preparation timeline</li>
+          <li>Scholarship and financial aid resources</li>
+        </ul>
+
+        <h2>Supporting Different Learning Styles</h2>
+        <p>
+          Every child learns differently. Learn how to identify and support various learning styles:
+        </p>
+        <ul>
+          <li>Visual learners - Using diagrams and charts</li>
+          <li>Auditory learners - Incorporating educational podcasts</li>
+          <li>Kinesthetic learners - Hands-on learning activities</li>
+          <li>Reading/writing preference - Text-based resources</li>
+        </ul>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Classdom Family Tips:</h3>
+          <ul class="list-disc pl-6">
+            <li>Schedule regular family learning time</li>
+            <li>Create educational game nights</li>
+            <li>Plan educational family outings</li>
+            <li>Set up family reading challenges</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Additional Resources:</h3>
+        <ul class="space-y-2">
+          {familyResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-primary-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

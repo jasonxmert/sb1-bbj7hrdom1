@@ -1,0 +1,96 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const googleClassroomLinks = [
+  { text: 'Official Google Classroom Help', url: 'https://support.google.com/edu/classroom' },
+  { text: 'Google for Education', url: 'https://edu.google.com' },
+  { text: 'Google Workspace Learning Center', url: 'https://support.google.com/a/users/answer/9282958' }
+];
+---
+
+<Layout 
+  title="Google Classroom Mastery Guide"
+  description="Comprehensive guide to mastering Google Classroom for educators and students"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Google Classroom Mastery Guide</h1>
+        <div class="text-gray-600">Last updated: April 2024</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Getting Started with Google Classroom</h2>
+        <p>
+          Google Classroom has become an essential tool for modern education, with over 150 million users worldwide. 
+          This comprehensive guide will help you master its features and create an engaging virtual learning environment.
+        </p>
+
+        <h2>Setting Up Your Virtual Classroom</h2>
+        <ol>
+          <li>Create a new class
+            <ul>
+              <li>Go to classroom.google.com</li>
+              <li>Click the + button</li>
+              <li>Select "Create Class"</li>
+            </ul>
+          </li>
+          <li>Customize your class settings
+            <ul>
+              <li>Add a class description</li>
+              <li>Choose a theme or upload custom images</li>
+              <li>Set grading categories</li>
+            </ul>
+          </li>
+        </ol>
+
+        <h2>Advanced Features and Tips</h2>
+        <h3>1. Assignment Management</h3>
+        <p>
+          Learn how to create, schedule, and grade assignments efficiently using Google Classroom's built-in tools.
+          Integration with Google Drive allows for seamless file management and organization.
+        </p>
+
+        <h3>2. Communication Tools</h3>
+        <p>
+          Utilize announcements, private comments, and class discussions to maintain clear communication channels with students.
+        </p>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Pro Tips for Educators:</h3>
+          <ul class="list-disc pl-6">
+            <li>Use topic tags to organize course content</li>
+            <li>Schedule posts in advance for better time management</li>
+            <li>Utilize rubrics for consistent grading</li>
+            <li>Enable guardian summaries for parent involvement</li>
+          </ul>
+        </div>
+
+        <h2>Integration with Other Google Tools</h2>
+        <p>
+          Maximize your virtual classroom's potential by integrating with:
+        </p>
+        <ul>
+          <li>Google Meet for video conferencing</li>
+          <li>Google Forms for assessments</li>
+          <li>Google Calendar for scheduling</li>
+          <li>Google Drive for file management</li>
+        </ul>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Official Resources:</h3>
+        <ul class="space-y-2">
+          {googleClassroomLinks.map(link => (
+            <li>
+              <a href={link.url} class="text-blue-600 hover:underline">{link.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

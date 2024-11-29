@@ -1,0 +1,102 @@
+---
+import Header from '../components/Header.astro';
+import '@fontsource/poppins/300.css';
+import '@fontsource/poppins/400.css';
+import '@fontsource/poppins/500.css';
+import '@fontsource/poppins/600.css';
+import '@fontsource/poppins/700.css';
+import '@fontsource/montserrat/400.css';
+import '@fontsource/montserrat/600.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Classdom - Your trusted resource for education excellence and smart living" } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3617801118337048" crossorigin="anonymous"></script>
+    <title>{title} | Classdom</title>
+  </head>
+  <body class="min-h-screen bg-gray-50 font-sans antialiased text-gray-600">
+    <Header />
+    <slot />
+    <footer class="bg-primary-900 text-gray-300 py-12 mt-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">About Classdom</h3>
+            <p class="text-sm">
+              Empowering educators and middle-class families with resources for success in education and life.
+            </p>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">Quick Links</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="/resources" class="hover:text-white transition-colors">Resources</a></li>
+              <li><a href="/blog" class="hover:text-white transition-colors">Blog</a></li>
+              <li><a href="/about" class="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="/contact" class="hover:text-white transition-colors">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">Resources</h3>
+            <ul class="space-y-2 text-sm">
+              <li><a href="/resources/google-classroom-guide" class="hover:text-white transition-colors">Google Classroom Guide</a></li>
+              <li><a href="/lifestyle/budget-guide" class="hover:text-white transition-colors">Budget Planning</a></li>
+              <li><a href="/tech/classroom-tools" class="hover:text-white transition-colors">Tech Tools</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 class="text-white font-semibold text-lg mb-4">Newsletter</h3>
+            <p class="text-sm mb-4">Stay updated with our latest resources and tips.</p>
+            <form class="space-y-2">
+              <input
+                type="email"
+                placeholder="Your email address"
+                class="w-full px-4 py-2 rounded-lg bg-primary-800 border border-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 text-white text-sm"
+              />
+              <button
+                type="submit"
+                class="w-full bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-400 transition-colors text-sm font-medium"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+        <div class="mt-12 pt-8 border-t border-primary-800 text-sm text-center">
+          <p>&copy; {new Date().getFullYear()} Classdom. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --font-family-sans: 'Poppins', system-ui, -apple-system, sans-serif;
+    --font-family-display: 'Montserrat', system-ui, -apple-system, sans-serif;
+    --font-family-body: 'Roboto', system-ui, -apple-system, sans-serif;
+  }
+  
+  html {
+    font-family: var(--font-family-sans);
+  }
+
+  ::selection {
+    background-color: #22c55e;
+    color: white;
+  }
+</style>

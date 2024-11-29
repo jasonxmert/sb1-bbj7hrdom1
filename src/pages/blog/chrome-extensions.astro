@@ -1,0 +1,68 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const chromeExtensions = [
+  { name: 'Grammarly', description: 'AI-powered writing assistant', url: 'https://chrome.google.com/webstore/detail/grammarly' },
+  { name: 'Kami', description: 'PDF and document annotation', url: 'https://chrome.google.com/webstore/detail/kami' },
+  { name: 'Screencastify', description: 'Screen recording and video creation', url: 'https://chrome.google.com/webstore/detail/screencastify' }
+];
+---
+
+<Layout 
+  title="Essential Chrome Extensions for Educators"
+  description="Must-have Chrome extensions for modern educators using Classdom"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Essential Chrome Extensions for Educators</h1>
+        <div class="flex items-center text-gray-600 text-sm">
+          <span>By Tech Team</span>
+          <span class="mx-2">•</span>
+          <time>April 12, 2024</time>
+        </div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Enhancing Your Teaching with Chrome Extensions</h2>
+        <p>
+          Chrome extensions can significantly improve your teaching efficiency and effectiveness. 
+          Here are our top recommendations for Classdom educators:
+        </p>
+
+        {chromeExtensions.map(extension => (
+          <div class="bg-white border rounded-lg p-6 my-4">
+            <h3 class="font-semibold text-lg mb-2">
+              <a href={extension.url} class="text-primary-600 hover:underline">{extension.name}</a>
+            </h3>
+            <p class="text-gray-600">{extension.description}</p>
+          </div>
+        ))}
+
+        <div class="bg-primary-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Extension Categories:</h3>
+          <ul class="list-disc pl-6">
+            <li>Productivity tools</li>
+            <li>Assessment and grading</li>
+            <li>Content creation</li>
+            <li>Classroom management</li>
+          </ul>
+        </div>
+
+        <h2>Implementation Tips</h2>
+        <p>
+          Make the most of these extensions in your Classdom teaching practice:
+        </p>
+        <ul>
+          <li>Start with one extension at a time</li>
+          <li>Create workflow integrations</li>
+          <li>Share discoveries with colleagues</li>
+          <li>Keep extensions updated</li>
+        </ul>
+      </div>
+    </article>
+  </main>
+</Layout>

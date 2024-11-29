@@ -1,0 +1,80 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const financialResources = [
+  { text: 'Personal Finance on Wikipedia', url: 'https://en.wikipedia.org/wiki/Personal_finance' },
+  { text: 'Consumer Financial Protection Bureau', url: 'https://www.consumerfinance.gov' },
+  { text: 'Middle-Class Economics', url: 'https://en.wikipedia.org/wiki/Middle_class' }
+];
+---
+
+<Layout 
+  title="Middle-Class Budget Planning Guide"
+  description="Comprehensive guide to financial planning and budgeting for middle-class families"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Middle-Class Budget Planning Guide</h1>
+        <div class="text-gray-600">Essential financial strategies for modern families</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Understanding Middle-Class Finances</h2>
+        <p>
+          According to recent economic studies, the middle class represents approximately 52% of American households.
+          This guide provides practical financial strategies tailored to middle-class families' unique needs and challenges.
+        </p>
+
+        <h2>Creating a Sustainable Budget</h2>
+        <h3>The 50/30/20 Rule</h3>
+        <ul>
+          <li>50% for essential expenses (housing, utilities, food)</li>
+          <li>30% for discretionary spending</li>
+          <li>20% for savings and debt repayment</li>
+        </ul>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Key Financial Goals:</h3>
+          <ul class="list-disc pl-6">
+            <li>Build an emergency fund (3-6 months of expenses)</li>
+            <li>Plan for retirement through 401(k) or IRA</li>
+            <li>Save for children's education (529 plans)</li>
+            <li>Maintain manageable debt levels</li>
+          </ul>
+        </div>
+
+        <h2>Smart Saving Strategies</h2>
+        <p>
+          Implement these proven strategies to build financial security:
+        </p>
+        <ul>
+          <li>Automate savings contributions</li>
+          <li>Take advantage of employer matching</li>
+          <li>Use tax-advantaged accounts</li>
+          <li>Consider low-cost index funds</li>
+        </ul>
+
+        <h2>Managing Education Expenses</h2>
+        <p>
+          Learn about financial aid options, scholarship opportunities, and strategies for managing education costs
+          while maintaining financial stability.
+        </p>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Additional Resources:</h3>
+        <ul class="space-y-2">
+          {financialResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-blue-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

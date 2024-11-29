@@ -1,0 +1,78 @@
+---
+const currentYear = new Date().getFullYear();
+
+interface FooterLink {
+  text: string;
+  href: string;
+}
+
+const quickLinks: FooterLink[] = [
+  { text: 'Resources', href: '/resources' },
+  { text: 'Blog', href: '/blog' },
+  { text: 'About Us', href: '/about' },
+  { text: 'Contact', href: '/contact' }
+];
+
+const resourceLinks: FooterLink[] = [
+  { text: 'Google Classroom Guide', href: '/resources/google-classroom-guide' },
+  { text: 'Budget Planning', href: '/lifestyle/budget-guide' },
+  { text: 'Tech Tools', href: '/tech/classroom-tools' }
+];
+---
+
+<footer class="bg-primary-900 text-gray-300 py-12 mt-20">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">About Classdom</h3>
+        <p class="text-sm">
+          Empowering educators and middle-class families with resources for success in education and life.
+        </p>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Quick Links</h3>
+        <ul class="space-y-2 text-sm">
+          {quickLinks.map(link => (
+            <li>
+              <a href={link.href} class="hover:text-white transition-colors">
+                {link.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Resources</h3>
+        <ul class="space-y-2 text-sm">
+          {resourceLinks.map(link => (
+            <li>
+              <a href={link.href} class="hover:text-white transition-colors">
+                {link.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-white font-semibold text-lg mb-4">Newsletter</h3>
+        <p class="text-sm mb-4">Stay updated with our latest resources and tips.</p>
+        <form class="space-y-2">
+          <input
+            type="email"
+            placeholder="Your email address"
+            class="w-full px-4 py-2 rounded-lg bg-primary-800 border border-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 text-white text-sm"
+          />
+          <button
+            type="submit"
+            class="w-full bg-primary-500 text-white px-4 py-2 rounded-lg hover:bg-primary-400 transition-colors text-sm font-medium"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="mt-12 pt-8 border-t border-primary-800 text-sm text-center">
+      <p>&copy; {currentYear} Classdom. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

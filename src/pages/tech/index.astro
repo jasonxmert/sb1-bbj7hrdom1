@@ -1,0 +1,115 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+import FeaturedResourceCard from '../../components/FeaturedResourceCard.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { Image } from 'astro:assets';
+
+const resources = [
+  {
+    title: "Classroom Tools",
+    description: "Essential technology tools for modern classrooms",
+    icon: "🔧",
+    href: "/tech/classroom-tools",
+    category: "Technology"
+  },
+  {
+    title: "Educational Apps",
+    description: "Curated list of must-have educational applications",
+    icon: "📱",
+    href: "/tech/educational-apps",
+    category: "Apps"
+  },
+  {
+    title: "Troubleshooting",
+    description: "Common tech issues and their solutions",
+    icon: "🔍",
+    href: "/tech/troubleshooting",
+    category: "Support"
+  }
+];
+
+const featuredVideos = [
+  {
+    title: "Google Classroom Mastery",
+    videoId: "dQw4w9WgXcQ",
+    description: "Complete guide to using Google Classroom effectively"
+  },
+  {
+    title: "Essential EdTech Tools",
+    videoId: "dQw4w9WgXcQ",
+    description: "Must-have technology tools for modern educators"
+  }
+];
+
+const toolImages = [
+  {
+    src: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3",
+    alt: "Educational technology",
+    caption: "Modern classroom technology"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158",
+    alt: "Digital learning",
+    caption: "Digital learning tools"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1531403009284-440f080d1e12",
+    alt: "Tech support",
+    caption: "Technology troubleshooting"
+  }
+];
+---
+
+<Layout title="Tech Tips">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Tech Tips</h1>
+    
+    <AdSense slot="header" />
+    
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Tools</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {resources.map(resource => (
+          <FeaturedResourceCard {...resource} />
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Tech Tutorials</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {featuredVideos.map(video => (
+          <div class="space-y-4">
+            <VideoEmbed
+              videoId={video.videoId}
+              title={video.title}
+            />
+            <h3 class="text-xl font-semibold">{video.title}</h3>
+            <p class="text-gray-600">{video.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">EdTech Showcase</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {toolImages.map(image => (
+          <figure class="relative">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={400}
+              height={300}
+              class="rounded-lg"
+            />
+            <figcaption class="mt-2 text-sm text-gray-600 text-center">
+              {image.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

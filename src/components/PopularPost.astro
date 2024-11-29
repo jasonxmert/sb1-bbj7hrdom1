@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  views: number;
+  href: string;
+}
+
+const { title, views, href } = Astro.props;
+---
+
+<li>
+  <a href={href} class="group flex justify-between items-start">
+    <span class="text-gray-700 group-hover:text-blue-600 transition-colors">{title}</span>
+    <span class="text-sm text-gray-500">{views} views</span>
+  </a>
+</li>

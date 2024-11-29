@@ -1,0 +1,79 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import MediaGallery from '../../components/MediaGallery.astro';
+
+const resources = [
+  {
+    title: "Google Classroom Guide",
+    description: "Master Google Classroom with our comprehensive guide",
+    image: {
+      src: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
+      alt: "Modern classroom with technology"
+    },
+    href: "/resources/google-classroom-guide",
+    category: "Online Learning"
+  },
+  {
+    title: "Lesson Plans",
+    description: "Ready-to-use lesson plans for all grade levels",
+    image: {
+      src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+      alt: "Students collaborating"
+    },
+    href: "/resources/lesson-plans",
+    category: "Teaching"
+  },
+  {
+    title: "Assessment Tools",
+    description: "Effective assessment strategies and tools",
+    image: {
+      src: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173",
+      alt: "Student assessment"
+    },
+    href: "/resources/assessment-tools",
+    category: "Evaluation"
+  }
+];
+
+const featuredImages = [
+  {
+    src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644",
+    alt: "Students in classroom",
+    caption: "Modern Learning Environments"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1427504494785-3a9ca7044f45",
+    alt: "Teacher helping student",
+    caption: "Personalized Learning Support"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
+    alt: "Technology in education",
+    caption: "Educational Technology Integration"
+  }
+];
+---
+
+<Layout title="Classroom Resources">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-4xl font-bold text-gray-900 mb-8">Classroom Resources</h1>
+    
+    <AdSense slot="header" />
+    
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Resources</h2>
+      <MediaGallery images={featuredImages} columns={3} />
+    </section>
+    
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">All Resources</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {resources.map(resource => (
+          <ResourceCard {...resource} />
+        ))}
+      </div>
+    </section>
+  </main>
+</Layout>

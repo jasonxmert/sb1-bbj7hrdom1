@@ -1,0 +1,75 @@
+---
+const links = [
+  { 
+    href: '/resources',
+    text: 'Classroom Resources',
+    sublinks: [
+      { href: '/resources/google-classroom-guide', text: 'Google Classroom Guide' },
+      { href: '/resources/lesson-plans', text: 'Lesson Plans' },
+      { href: '/resources/assessment-tools', text: 'Assessment Tools' }
+    ]
+  },
+  { 
+    href: '/lifestyle',
+    text: 'Middle-Class Life',
+    sublinks: [
+      { href: '/lifestyle/budget-guide', text: 'Budget Planning' },
+      { href: '/lifestyle/savings-tips', text: 'Savings Tips' },
+      { href: '/lifestyle/family-resources', text: 'Family Resources' }
+    ]
+  },
+  { 
+    href: '/learning',
+    text: 'Online Learning',
+    sublinks: [
+      { href: '/learning/remote-teaching', text: 'Remote Teaching' },
+      { href: '/learning/student-engagement', text: 'Student Engagement' },
+      { href: '/learning/parent-guides', text: 'Parent Guides' }
+    ]
+  },
+  { 
+    href: '/tech',
+    text: 'Tech Tips',
+    sublinks: [
+      { href: '/tech/classroom-tools', text: 'Classroom Tools' },
+      { href: '/tech/educational-apps', text: 'Educational Apps' },
+      { href: '/tech/troubleshooting', text: 'Troubleshooting' }
+    ]
+  },
+  { 
+    href: '/blog',
+    text: 'Blog'
+  }
+];
+---
+
+<nav class="flex flex-col md:flex-row md:items-center md:space-x-6">
+  {links.map(link => (
+    <div class="group relative">
+      <a 
+        href={link.href}
+        class="text-gray-600 hover:text-primary-600 transition-colors py-2 inline-block"
+      >
+        {link.text}
+        {link.sublinks && (
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline-block ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        )}
+      </a>
+      
+      {link.sublinks && (
+        <div class="hidden group-hover:block absolute left-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
+          {link.sublinks.map(sublink => (
+            <a
+              href={sublink.href}
+              class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-primary-600"
+            >
+              {sublink.text}
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  ))}
+</nav>

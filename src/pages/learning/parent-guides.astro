@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const parentResources = [
+  { text: 'Parent Involvement in Education', url: 'https://en.wikipedia.org/wiki/Parent_involvement_in_education' },
+  { text: 'Family Engagement Framework', url: 'https://www.ed.gov/parent-and-family-engagement' },
+  { text: 'Supporting Learning at Home', url: 'https://www.edutopia.org/topic/parent-partnership' }
+];
+---
+
+<Layout 
+  title="Parent Guides for Student Success"
+  description="Essential resources and strategies for parents supporting their children's education"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Parent Guides for Student Success</h1>
+        <div class="text-gray-600">Supporting your child's educational journey</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Creating a Supportive Learning Environment</h2>
+        <p>
+          Learn how to establish an effective study space and routine at home that promotes learning and academic success.
+        </p>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Essential Tips:</h3>
+          <ul class="list-disc pl-6">
+            <li>Designate a quiet study area</li>
+            <li>Establish consistent homework routines</li>
+            <li>Monitor screen time and digital activities</li>
+            <li>Maintain open communication with teachers</li>
+          </ul>
+        </div>
+
+        <h2>Supporting Different Learning Styles</h2>
+        <p>
+          Understand different learning styles and how to support your child's unique needs:
+        </p>
+        <ul>
+          <li>Visual learners</li>
+          <li>Auditory learners</li>
+          <li>Kinesthetic learners</li>
+          <li>Reading/writing preference</li>
+        </ul>
+
+        <h2>Technology and Learning</h2>
+        <p>
+          Guide to managing technology use and leveraging educational resources:
+        </p>
+        <ul>
+          <li>Educational apps and websites</li>
+          <li>Online safety guidelines</li>
+          <li>Productive screen time</li>
+          <li>Digital literacy skills</li>
+        </ul>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Additional Resources:</h3>
+        <ul class="space-y-2">
+          {parentResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-blue-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

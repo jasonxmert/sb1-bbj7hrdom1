@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const appCategories = [
+  {
+    title: "Learning Management",
+    apps: [
+      { name: "Google Classroom", description: "Comprehensive classroom management", url: "https://classroom.google.com" },
+      { name: "Canvas", description: "Feature-rich learning platform", url: "https://www.instructure.com/canvas" }
+    ]
+  },
+  {
+    title: "Assessment Tools",
+    apps: [
+      { name: "Kahoot!", description: "Game-based learning platform", url: "https://kahoot.com" },
+      { name: "Quizizz", description: "Engaging quiz creation tool", url: "https://quizizz.com" }
+    ]
+  },
+  {
+    title: "Collaboration Tools",
+    apps: [
+      { name: "Padlet", description: "Digital bulletin board", url: "https://padlet.com" },
+      { name: "Flipgrid", description: "Video discussion platform", url: "https://info.flipgrid.com" }
+    ]
+  }
+];
+---
+
+<Layout 
+  title="Educational Apps Guide"
+  description="Comprehensive guide to essential educational applications and tools"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Essential Educational Apps</h1>
+        <div class="text-gray-600">Curated collection of must-have educational tools</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        {appCategories.map(category => (
+          <section class="mb-8">
+            <h2>{category.title}</h2>
+            <div class="grid gap-6">
+              {category.apps.map(app => (
+                <div class="border rounded-lg p-6">
+                  <h3 class="font-semibold mb-2">
+                    <a href={app.url} class="text-blue-600 hover:underline">{app.name}</a>
+                  </h3>
+                  <p class="text-gray-600">{app.description}</p>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Selection Criteria:</h3>
+          <ul class="list-disc pl-6">
+            <li>Ease of use for teachers and students</li>
+            <li>Integration capabilities with existing tools</li>
+            <li>Cost-effectiveness for middle-class budgets</li>
+            <li>Regular updates and reliable support</li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </main>
+</Layout>

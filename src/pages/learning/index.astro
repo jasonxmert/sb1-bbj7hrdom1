@@ -1,0 +1,138 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+import FeaturedResourceCard from '../../components/FeaturedResourceCard.astro';
+import VideoEmbed from '../../components/VideoEmbed.astro';
+import { Image } from 'astro:assets';
+
+const resources = [
+  {
+    title: "Remote Teaching",
+    description: "Best practices for effective remote instruction",
+    icon: "🖥️",
+    href: "/learning/remote-teaching",
+    category: "Online Learning"
+  },
+  {
+    title: "Student Engagement",
+    description: "Strategies to keep students engaged and motivated",
+    icon: "🎯",
+    href: "/learning/student-engagement",
+    category: "Teaching"
+  },
+  {
+    title: "Parent Guides",
+    description: "Resources for supporting learning at home",
+    icon: "👪",
+    href: "/learning/parent-guides",
+    category: "Family"
+  }
+];
+
+const featuredVideos = [
+  {
+    title: "Mastering Online Teaching",
+    videoId: "dQw4w9WgXcQ",
+    description: "Expert strategies for effective online instruction and student engagement"
+  },
+  {
+    title: "Digital Learning Tools Guide",
+    videoId: "dQw4w9WgXcQ",
+    description: "Essential digital tools and platforms for modern education"
+  }
+];
+
+const learningImages = [
+  {
+    src: "https://images.unsplash.com/photo-1571260899304-425eee4c7efd",
+    alt: "Virtual classroom setup",
+    caption: "Modern virtual learning environments"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1587691592099-24045742c181",
+    alt: "Student using laptop",
+    caption: "Digital learning in action"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
+    alt: "Educational technology",
+    caption: "Innovative learning tools"
+  }
+];
+
+const quickTips = [
+  "Create engaging virtual lessons",
+  "Use interactive assessment tools",
+  "Implement flipped classroom strategies",
+  "Foster online collaboration"
+];
+---
+
+<Layout title="Online Learning">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <h1 class="text-3xl font-bold text-gray-900 mb-8">Online Learning Resources</h1>
+    
+    <AdSense slot="header" />
+    
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Resources</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {resources.map(resource => (
+          <FeaturedResourceCard {...resource} />
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Expert Video Tutorials</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {featuredVideos.map(video => (
+          <div class="space-y-4">
+            <VideoEmbed
+              videoId={video.videoId}
+              title={video.title}
+            />
+            <h3 class="text-xl font-semibold">{video.title}</h3>
+            <p class="text-gray-600">{video.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Learning in Action</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {learningImages.map(image => (
+          <figure class="relative">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={400}
+              height={300}
+              class="rounded-lg"
+            />
+            <figcaption class="mt-2 text-sm text-gray-600 text-center">
+              {image.caption}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2 class="text-2xl font-bold text-gray-900 mb-6">Quick Tips for Success</h2>
+      <div class="bg-primary-50 rounded-lg p-8">
+        <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {quickTips.map(tip => (
+            <li class="flex items-center space-x-2">
+              <svg class="w-5 h-5 text-primary-600" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
+              <span>{tip}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  </main>
+</Layout>

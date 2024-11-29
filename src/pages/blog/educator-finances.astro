@@ -1,0 +1,75 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const financialResources = [
+  { text: 'Teacher Retirement Planning', url: 'https://www.irs.gov/retirement-plans/retirement-plans-for-teachers' },
+  { text: 'Middle-Class Economics', url: 'https://en.wikipedia.org/wiki/Middle_class' },
+  { text: 'Financial Planning Basics', url: 'https://www.investopedia.com/financial-planning-4427729' }
+];
+---
+
+<Layout 
+  title="Smart Money Moves for Educators"
+  description="Financial planning strategies tailored for middle-class educators, featuring practical tips and expert advice from Classdom."
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Smart Money Moves for Educators</h1>
+        <div class="flex items-center text-gray-600 text-sm">
+          <span>By Michael Chen</span>
+          <span class="mx-2">•</span>
+          <time>April 14, 2024</time>
+        </div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Understanding Educator Finances in 2024</h2>
+        <p>
+          According to the <a href="https://www.bls.gov/ooh/education-training-and-library/home.htm" class="text-blue-600 hover:underline">Bureau of Labor Statistics</a>,
+          educators in middle-class communities face unique financial challenges. At Classdom, we've developed strategies specifically for teaching professionals
+          balancing classroom expenses with personal financial goals.
+        </p>
+
+        <h2>1. Maximizing Teacher Benefits</h2>
+        <p>
+          Learn about pension plans and healthcare benefits through resources like 
+          <a href="https://www.nea.org/your-rights-workplace" class="text-blue-600 hover:underline">NEA Member Benefits</a>. 
+          Understanding your benefits package can save the average educator $3,000+ annually.
+        </p>
+
+        <h2>2. Tax Deductions for Educators</h2>
+        <p>
+          The <a href="https://www.irs.gov/taxtopics/tc458" class="text-blue-600 hover:underline">IRS educator expense deduction</a> 
+          allows teachers to deduct up to $300 for classroom supplies. Track your expenses using our Classdom expense tracker template.
+        </p>
+
+        <!-- Additional sections... -->
+
+        <div class="bg-blue-50 p-6 rounded-lg mt-8">
+          <h3 class="font-semibold mb-2">Financial Planning Checklist:</h3>
+          <ul class="list-disc pl-6">
+            <li>Review and optimize retirement contributions</li>
+            <li>Track classroom expenses for tax deductions</li>
+            <li>Explore supplemental income opportunities</li>
+            <li>Build an emergency fund for summer months</li>
+          </ul>
+        </div>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Additional Resources:</h3>
+        <ul class="space-y-2">
+          {financialResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-blue-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>

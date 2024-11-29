@@ -1,0 +1,168 @@
+---
+import VideoEmbed from './VideoEmbed.astro';
+
+const videos = [
+  {
+    title: "Getting Started with Google Classroom",
+    description: "Learn how to set up and manage your digital classroom effectively",
+    videoId: "88idNZxeZbo",
+    platform: "youtube",
+    thumbnail: "https://images.unsplash.com/photo-1571260899304-425eee4c7efd"
+  },
+  {
+    title: "Financial Planning for Educators",
+    description: "Expert strategies for managing education expenses",
+    videoId: "u-cLVS3WqrQ",
+    platform: "youtube",
+    thumbnail: "https://images.unsplash.com/photo-1554224155-6726b3ff858f"
+  },
+  {
+    title: "Effective Remote Teaching",
+    description: "Best practices for online education and student engagement",
+    videoId: "M4Bx0KAzj0w",
+    platform: "youtube",
+    thumbnail: "https://images.unsplash.com/photo-1587691592099-24045742c181"
+  }
+];
+---
+
+<div class="max-w-full overflow-hidden">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    {videos.map(video => (
+      <div class="bg-white rounded-lg shadow-md overflow-hidden group hover:shadow-lg transition-shadow">
+        <div class="relative aspect-video bg-gray-100">
+          <img
+            src={video.thumbnail}
+            alt={video.title}
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+            <button
+              class="play-button p-4 rounded-full bg-primary-600 hover:bg-primary-700 transition-colors transform hover:scale-110"
+              data-video-id={video.videoId}
+              data-platform={video.platform}
+            >
+              <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-2 text-gray-900">{video.title}</h3>
+          <p class="text-gray-600">{video.description}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<div id="videoModal" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-black bg-opacity-75 backdrop-blur-sm"></div>
+  <div class="absolute inset-0 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-auto">
+      <div class="relative">
+        <div class="aspect-video">
+          <iframe
+            id="videoFrame"
+            class="w-full h-full"
+            src=""
+            title="Video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <button
+          id="closeModal"
+          class="absolute -top-4 -right-4 bg-white rounded-full p-2 shadow-lg hover:bg-gray-100"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initializeVideoSlider() {
+    const modal = document.getElementById('videoModal');
+    const videoFrame = document.getElementById('videoFrame');
+    const closeButton = document.getElementById('closeModal');
+    
+    function openModal(videoId: string, platform: string) {
+      if (!modal || !videoFrame) return;
+      
+      const embedUrl = platform === 'youtube' 
+        ? `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`
+        : `https://player.vimeo.com/video/${videoId}?autoplay=1`;
+      
+      videoFrame.src = embedUrl;
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    function closeModal() {
+      if (!modal || !videoFrame) return;
+      
+      videoFrame.src = '';
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+    
+    // Add click handlers to play buttons
+    document.querySelectorAll('.play-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const videoId = button.getAttribute('data-video-id');
+        const platform = button.getAttribute('data-platform');
+        if (videoId && platform) {
+          openModal(videoId, platform);
+        }
+      });
+    });
+    
+    // Close modal handlers
+    closeButton?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+  }
+
+  // Initialize when the DOM is ready
+  document.addEventListener('DOMContentLoaded', initializeVideoSlider);
+</script>
+
+<style>
+  .play-button {
+    transition: transform 0.2s ease;
+  }
+
+  .play-button:hover {
+    transform: scale(1.1);
+  }
+
+  #videoModal {
+    transition: opacity 0.3s ease;
+  }
+
+  #videoModal.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  #videoModal:not(.hidden) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import { Image } from 'astro:assets';
+
+const images = [
+  {
+    src: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b",
+    alt: "Students collaborating",
+    caption: "Building collaborative learning environments"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1523240795612-9a054b0db644",
+    alt: "Family financial planning",
+    caption: "Smart financial planning for families"
+  },
+  {
+    src: "https://images.unsplash.com/photo-1509062522246-3755977927d7",
+    alt: "Modern classroom",
+    caption: "Modern educational technologies"
+  }
+];
+---
+
+<div class="swiper">
+  <div class="swiper-wrapper">
+    {images.map(image => (
+      <div class="swiper-slide">
+        <div class="relative">
+          <Image
+            src={image.src}
+            alt={image.alt}
+            width={800}
+            height={500}
+            class="rounded-lg"
+          />
+          <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+            <p class="text-white text-lg">{image.caption}</p>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+
+<script>
+  import Swiper from 'swiper';
+  import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+  import 'swiper/css';
+  import 'swiper/css/navigation';
+  import 'swiper/css/pagination';
+
+  new Swiper('.swiper', {
+    modules: [Navigation, Pagination, Autoplay],
+    slidesPerView: 1,
+    spaceBetween: 30,
+    loop: true,
+    autoplay: {
+      delay: 5000,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      clickable: true,
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+</script>

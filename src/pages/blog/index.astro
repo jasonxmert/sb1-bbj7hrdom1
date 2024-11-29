@@ -1,0 +1,140 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+import BlogPostPreview from '../../components/BlogPostPreview.astro';
+
+const featuredPosts = [
+  {
+    title: "10 Ways to Make Remote Learning More Engaging",
+    excerpt: "Discover proven strategies to keep students motivated and engaged in virtual classrooms. Learn about interactive tools, gamification, and effective communication methods.",
+    author: "Sarah Johnson",
+    date: "April 15, 2024",
+    category: "Online Learning",
+    href: "/blog/remote-learning-engagement",
+    featured: true
+  },
+  {
+    title: "Smart Money Moves for Educators",
+    excerpt: "Financial planning tips specifically tailored for teaching professionals. Learn about retirement planning, tax benefits, and investment strategies for educators.",
+    author: "Michael Chen",
+    date: "April 14, 2024",
+    category: "Middle-Class Life",
+    href: "/blog/educator-finances",
+    featured: true
+  }
+];
+
+const recentPosts = [
+  {
+    title: "Creating an Inclusive Classroom Environment",
+    excerpt: "Practical strategies for fostering diversity and inclusion in education. Implement Universal Design for Learning principles and cultural competency.",
+    author: "Dr. Emily Martinez",
+    date: "April 13, 2024",
+    category: "Teaching Resources",
+    href: "/blog/inclusive-classroom"
+  },
+  {
+    title: "Essential Chrome Extensions for Teachers",
+    excerpt: "Boost your productivity with these must-have Chrome extensions for educators. Streamline grading, lesson planning, and classroom management.",
+    author: "Tech Team",
+    date: "April 12, 2024",
+    category: "Tech Tips",
+    href: "/blog/chrome-extensions"
+  },
+  {
+    title: "Virtual Field Trip Ideas",
+    excerpt: "Take your students on amazing virtual adventures. Explore museums, historical sites, and natural wonders from your classroom.",
+    author: "Lisa Thompson",
+    date: "April 11, 2024",
+    category: "Teaching Resources",
+    href: "/blog/virtual-field-trips"
+  }
+];
+
+const categories = [
+  "All Posts",
+  "Online Learning",
+  "Teaching Resources",
+  "Middle-Class Life",
+  "Tech Tips",
+  "Student Success"
+];
+---
+
+<Layout title="Classdom Blog - Educational Insights & Resources">
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-12">
+      <h1 class="text-4xl font-bold text-gray-900 mb-4">Classdom Blog</h1>
+      <p class="text-xl text-gray-600">Insights, strategies, and resources for educators and middle-class families</p>
+    </header>
+
+    <AdSense slot="header" />
+
+    <nav class="mb-12">
+      <ul class="flex flex-wrap gap-4">
+        {categories.map(category => (
+          <li>
+            <button class="px-4 py-2 rounded-full bg-gray-100 hover:bg-blue-50 text-gray-700 hover:text-blue-600 transition-colors">
+              {category}
+            </button>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-2">
+        <section class="mb-12">
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Featured Articles</h2>
+          <div class="space-y-8">
+            {featuredPosts.map(post => (
+              <BlogPostPreview {...post} />
+            ))}
+          </div>
+        </section>
+
+        <section>
+          <h2 class="text-2xl font-bold text-gray-900 mb-6">Recent Articles</h2>
+          <div class="space-y-8">
+            {recentPosts.map(post => (
+              <BlogPostPreview {...post} />
+            ))}
+          </div>
+        </section>
+      </div>
+
+      <aside class="space-y-8">
+        <AdSense slot="sidebar" />
+
+        <div class="bg-white p-6 rounded-lg shadow-sm">
+          <h3 class="text-lg font-semibold mb-4">Subscribe to Our Newsletter</h3>
+          <p class="text-gray-600 mb-4">Get the latest educational insights and resources delivered to your inbox.</p>
+          <form class="space-y-4">
+            <input
+              type="email"
+              placeholder="Your email address"
+              class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="submit"
+              class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-500 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+
+        <div class="bg-gray-50 p-6 rounded-lg">
+          <h3 class="text-lg font-semibold mb-4">Popular Topics</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">Remote Learning</span>
+            <span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">Financial Planning</span>
+            <span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">EdTech</span>
+            <span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">Classroom Management</span>
+            <span class="px-3 py-1 bg-white rounded-full text-sm text-gray-700">Student Engagement</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </main>
+</Layout>

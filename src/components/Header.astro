@@ -1,0 +1,83 @@
+---
+import Logo from './Logo.astro';
+import Navigation from './Navigation.astro';
+import SearchBar from './SearchBar.astro';
+---
+
+<header class="bg-white shadow-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <a href="/" class="flex items-center hover:opacity-90 transition-opacity">
+        <Logo />
+      </a>
+      
+      <div class="hidden md:flex items-center space-x-8">
+        <Navigation />
+        <SearchBar />
+      </div>
+
+      <button 
+        class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+        id="mobile-menu-button"
+        aria-label="Menu"
+        aria-expanded="false"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <div 
+      class="md:hidden fixed inset-0 bg-white z-50 transform transition-transform duration-300 ease-in-out translate-x-full"
+      id="mobile-menu"
+    >
+      <div class="h-full overflow-y-auto">
+        <div class="flex justify-between items-center p-4 border-b">
+          <Logo />
+          <button 
+            class="p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            id="mobile-menu-close"
+            aria-label="Close menu"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+        <div class="p-4">
+          <Navigation />
+          <div class="mt-4">
+            <SearchBar />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenuClose = document.getElementById('mobile-menu-close');
+  const mobileMenu = document.getElementById('mobile-menu');
+
+  function toggleMenu(show: boolean) {
+    if (!mobileMenu) return;
+    
+    mobileMenu.style.transform = show ? 'translateX(0)' : 'translateX(100%)';
+    document.body.style.overflow = show ? 'hidden' : '';
+    
+    if (mobileMenuButton) {
+      mobileMenuButton.setAttribute('aria-expanded', show.toString());
+    }
+  }
+
+  mobileMenuButton?.addEventListener('click', () => toggleMenu(true));
+  mobileMenuClose?.addEventListener('click', () => toggleMenu(false));
+
+  // Close menu on escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') toggleMenu(false);
+  });
+</script>

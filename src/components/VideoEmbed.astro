@@ -1,0 +1,144 @@
+---
+interface Props {
+  videoId: string;
+  title: string;
+  platform?: 'youtube' | 'vimeo';
+  aspectRatio?: '16:9' | '4:3';
+}
+
+const { 
+  videoId, 
+  title, 
+  platform = 'youtube',
+  aspectRatio = '16:9'
+} = Astro.props;
+
+const getEmbedUrl = (platform: string, videoId: string) => {
+  const urls = {
+    youtube: `https://www.youtube-nocookie.com/embed/${videoId}?rel=0&modestbranding=1&enablejsapi=1`,
+    vimeo: `https://player.vimeo.com/video/${videoId}`
+  };
+  return urls[platform];
+};
+
+const aspects = {
+  '16:9': 'aspect-video',
+  '4:3': 'aspect-4/3'
+};
+---
+
+<div class="video-embed-container">
+  <div class={`relative ${aspects[aspectRatio]} w-full bg-gray-100 rounded-lg overflow-hidden`}>
+    <div class="video-placeholder absolute inset-0 flex items-center justify-center bg-gray-100">
+      <button 
+        class="play-button p-4 rounded-full bg-primary-600 hover:bg-primary-700 transition-colors"
+        aria-label="Play video"
+        data-video-id={videoId}
+        data-platform={platform}
+      >
+        <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="video-frame-container absolute inset-0 opacity-0 transition-opacity duration-300">
+      <iframe
+        class="w-full h-full"
+        src="about:blank"
+        data-src={getEmbedUrl(platform, videoId)}
+        title={title}
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<script>
+  class VideoEmbedHandler {
+    private container: HTMLElement;
+    private placeholder: HTMLElement | null;
+    private frameContainer: HTMLElement | null;
+    private playButton: HTMLButtonElement | null;
+    private iframe: HTMLIFrameElement | null;
+
+    constructor(container: HTMLElement) {
+      this.container = container;
+      this.placeholder = container.querySelector('.video-placeholder');
+      this.frameContainer = container.querySelector('.video-frame-container');
+      this.playButton = container.querySelector('.play-button');
+      this.iframe = this.frameContainer?.querySelector('iframe') || null;
+      
+      this.init();
+    }
+
+    private init() {
+      if (this.playButton) {
+        this.playButton.addEventListener('click', () => this.loadVideo());
+      }
+    }
+
+    private loadVideo() {
+      if (!this.iframe || !this.frameContainer || !this.placeholder) return;
+
+      const videoSrc = this.iframe.getAttribute('data-src');
+      if (!videoSrc) return;
+
+      try {
+        // Load the video
+        this.iframe.src = videoSrc;
+        
+        // Show the video container
+        this.frameContainer.style.opacity = '1';
+        
+        // Hide the placeholder
+        this.placeholder.style.display = 'none';
+        
+        // Remove the placeholder after animation
+        setTimeout(() => {
+          this.placeholder?.remove();
+        }, 300);
+      } catch (error) {
+        console.error('Error loading video:', error);
+        this.showError('Failed to load video. Please try again.');
+      }
+    }
+
+    private showError(message: string) {
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'absolute inset-0 flex items-center justify-center bg-black bg-opacity-75 text-white text-center p-4';
+      errorDiv.textContent = message;
+      this.container.appendChild(errorDiv);
+    }
+  }
+
+  // Initialize all video embeds when the DOM is ready
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.video-embed-container').forEach(container => {
+      new VideoEmbedHandler(container as HTMLElement);
+    });
+  });
+</script>
+
+<style>
+  .video-embed-container {
+    background-color: theme('colors.gray.100');
+    border-radius: theme('borderRadius.lg');
+  }
+
+  .play-button {
+    cursor: pointer;
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.2));
+    transition: transform 0.2s ease;
+  }
+
+  .play-button:hover {
+    transform: scale(1.1);
+    filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.3));
+  }
+
+  .video-frame-container iframe {
+    border: 0;
+  }
+</style>

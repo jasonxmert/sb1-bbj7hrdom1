@@ -1,0 +1,78 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import AdSense from '../../components/AdSense.astro';
+
+const engagementResources = [
+  { text: 'Student Engagement Research', url: 'https://en.wikipedia.org/wiki/Student_engagement' },
+  { text: 'Active Learning Strategies', url: 'https://www.edutopia.org/active-learning' },
+  { text: 'Classroom Management Tips', url: 'https://www.teachhub.com/classroom-management' }
+];
+---
+
+<Layout 
+  title="Student Engagement Strategies"
+  description="Effective strategies for keeping students engaged and motivated in both virtual and physical classrooms"
+>
+  <main class="max-w-4xl mx-auto px-4 py-12">
+    <article class="bg-white rounded-lg shadow-sm p-8">
+      <header class="mb-8">
+        <h1 class="text-3xl font-bold mb-4">Student Engagement Strategies</h1>
+        <div class="text-gray-600">Proven techniques for maximum student participation</div>
+      </header>
+
+      <AdSense slot="content" />
+
+      <div class="prose max-w-none">
+        <h2>Understanding Student Engagement</h2>
+        <p>
+          Student engagement is crucial for effective learning. Research shows that
+          engaged students are more likely to succeed academically and develop
+          positive attitudes toward learning.
+        </p>
+
+        <div class="bg-blue-50 p-6 rounded-lg my-8">
+          <h3 class="font-semibold mb-4">Key Components of Engagement:</h3>
+          <ul class="list-disc pl-6">
+            <li>Behavioral engagement (participation)</li>
+            <li>Emotional engagement (interest)</li>
+            <li>Cognitive engagement (effort)</li>
+            <li>Social engagement (collaboration)</li>
+          </ul>
+        </div>
+
+        <h2>Interactive Learning Strategies</h2>
+        <p>
+          Implement these proven techniques to boost engagement:
+        </p>
+        <ul>
+          <li>Think-Pair-Share activities</li>
+          <li>Project-based learning</li>
+          <li>Gamification elements</li>
+          <li>Student-led discussions</li>
+        </ul>
+
+        <h2>Technology Integration</h2>
+        <p>
+          Enhance engagement through strategic use of technology:
+        </p>
+        <ul>
+          <li>Interactive presentation tools</li>
+          <li>Digital collaboration platforms</li>
+          <li>Educational games and simulations</li>
+          <li>Multimedia resources</li>
+        </ul>
+      </div>
+
+      <footer class="mt-8 pt-8 border-t">
+        <h3 class="font-semibold mb-4">Learn More:</h3>
+        <ul class="space-y-2">
+          {engagementResources.map(resource => (
+            <li>
+              <a href={resource.url} class="text-blue-600 hover:underline">{resource.text}</a>
+            </li>
+          ))}
+        </ul>
+      </footer>
+    </article>
+  </main>
+</Layout>
